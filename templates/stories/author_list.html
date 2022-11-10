@@ -1,1 +1,40 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
 
+{% block content %}
+  <h1>
+    Author List
+    <a href="{% url 'stories:author-list' %}" class="btn btn-primary link-to-page">
+      Create
+    </a>
+  </h1>
+  <form action="" method="get" class="form-inline table">
+    {{ search_form|crispy }}
+    <input class="btn btn-secondary" type="submit" value="🔍">
+  </form>
+
+  {% if author_list %}
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Pseudonym</th>
+      </tr>
+      {% for author in author_list %}
+        <tr>
+          <td>{{ author.id }}</td>
+          <td><a href="{{ author.get_absolute_url }}">{{ author.username }} {% if user == author %} (Me){% endif %}</a>
+          </td>
+          <td>{{ author.first_name }}</td>
+          <td>{{ author.last_name }}</td>
+          <td>{{ author.pseudonym }}</td>
+        </tr>
+      {% endfor %}
+
+    </table>
+  {% else %}
+    <p>There are no author.</p>
+  {% endif %}
+{% endblock %}
