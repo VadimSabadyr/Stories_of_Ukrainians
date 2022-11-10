@@ -6,7 +6,7 @@
   </h2>
   <p>City: ({{ publication.city.name }})</p>
   <h3>
-    Authors({{ publication.authors.name }} {{ publication.authors.last_name }})
+    Authors
 
     {% if publication in user.publications.all %}
       <a href="{% url 'stories:toggle-publication-assign' pk=publication.id %}" class="btn btn-danger link-to-page">
