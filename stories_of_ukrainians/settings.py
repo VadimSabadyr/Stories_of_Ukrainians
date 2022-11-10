@@ -73,6 +73,8 @@ WSGI_APPLICATION = "stories_of_ukrainians.wsgi.application"
 
 AUTH_USER_MODEL = "stories.Author"
 
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -120,6 +122,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
+
+STATICFILES_DIRS = (BASE_DIR / "static",)
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
