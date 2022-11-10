@@ -75,6 +75,8 @@ AUTH_USER_MODEL = "stories.Author"
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
+LOGIN_REDIRECT_URL = "/"
+
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

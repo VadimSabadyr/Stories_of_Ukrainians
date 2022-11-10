@@ -1,10 +1,11 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from .forms import CitySearchForm, PublicationSearchForm, PublicationForm
+from .forms import CitySearchForm, PublicationSearchForm, PublicationForm, AuthorSearchForm, AuthorPseudonymUpdateForm
 from .models import City, Author, Publication
 
 
@@ -94,7 +95,7 @@ class PublicationListView(LoginRequiredMixin, generic.ListView):
 
         if form.is_valid():
             return self.queryset.filter(
-                model__icontains=form.cleaned_data["model"]
+                title__icontains=form.cleaned_data["title"]
             )
 
         return self.queryset
@@ -119,3 +120,63 @@ class PublicationUpdateView(LoginRequiredMixin, generic.UpdateView):
 class PublicationDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Publication
     success_url = reverse_lazy("stories:publication-list")
+
+
+class AuthorListView(LoginRequiredMixin, generic.ListView):
+    model = Author
+    paginate_by = 5
+    queryset = Author.objects.all()
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(AuthorListView, self).get_context_data(**kwargs)
+
+        username = self.request.GET.get("username", "")
+
+        context["search_form"] = AuthorSearchForm(
+            initial={"username": username}
+        )
+
+        return context
+
+    def get_queryset(self):
+        form = AuthorSearchForm(self.request.GET)
+
+        if form.is_valid():
+            return self.queryset.filter(
+                username__icontains=form.cleaned_data["username"]
+            )
+
+        return self.queryset
+
+
+class AuthorDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Author
+    queryset = Author.objects.all().prefetch_related("publications__city")
+
+
+class AuthorCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Author
+    form_class = Author
+
+
+class AuthorPseudonymUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Author
+    form_class = AuthorPseudonymUpdateForm
+    success_url = reverse_lazy("taxi:author-list")
+
+
+class AuthorDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Author
+    success_url = reverse_lazy("")
+
+
+@login_required
+def toggle_assign_to_car(request, pk):
+    author = Author.objects.get(id=request.user.id)
+    if (
+        Publication.objects.get(id=pk) in author.cars.all()
+    ):
+        author.cars.remove(pk)
+    else:
+        author.cars.add(pk)
+    return HttpResponseRedirect(reverse_lazy("taxi:author-detail", args=[pk]))
