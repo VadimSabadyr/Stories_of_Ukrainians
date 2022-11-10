@@ -13,7 +13,7 @@ class City(models.Model):
 
 
 class Author(AbstractUser):
-    license_number = models.TextChoices("brilliant", "good")
+    pseudonym = models.CharField(max_length=80, null=True, blank=True)
 
     class Meta:
         verbose_name = "author"
