@@ -1,1 +1,40 @@
+{% extends "base.html" %}
 
+{% block content %}
+  <h2>
+    {{ publication.title }}
+  </h2>
+  <p>City: ({{ publication.city.name }})</p>
+  <h3>
+    Authors({{ publication.authors.name }} {{ publication.authors.last_name }})
+
+    {% if publication in user.publications.all %}
+      <a href="{% url 'stories:toggle-publication-assign' pk=publication.id %}" class="btn btn-danger link-to-page">
+        Delete me from this story
+      </a>
+    {% else %}
+      <a href="{% url 'stories:toggle-publication-assign' pk=publication.id %}" class="btn btn-success link-to-page">
+        Assign me from this story
+      </a>
+    {% endif %}
+
+  </h3>
+  <hr>
+  <ul>
+    {% for author in publication.authors.all %}
+      <li>
+        {{ author.username }} ({{ author.first_name }} {{ author.last_name }})
+        <br>
+        {{ publication.story }}
+      </li>
+      <br>
+    {% endfor %}
+      <a href="{% url 'stories:publication-delete' pk=publication.id %}" class="btn btn-danger link-to-page">
+      Delete
+    </a>
+
+    <a href="{% url 'stories:publication-update' pk=publication.id %}" class="btn btn-secondary link-to-page">
+      Update
+    </a>
+  </ul>
+{% endblock %}

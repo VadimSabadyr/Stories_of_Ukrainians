@@ -19,8 +19,13 @@
       {% for publication in publication_list %}
         <li>
           <a href="{% url "stories:publication-detail" pk=publication.id %} ">{{ publication.id }}</a>
-          {{ publication.title }} ({{ publication.city.name }})
+
+          {{ publication.title }}
+          ({{ publication.city.name }})
+          <br>
+          {{ publication.story }}
         </li>
+        <br>
       {% endfor %}
     </ul>
   {% else %}
