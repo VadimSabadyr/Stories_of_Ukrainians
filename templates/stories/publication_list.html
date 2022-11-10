@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <h1>
+    Publication list
+    <a href="{% url 'stories:publication-create' %}" class="btn btn-primary link-to-page">
+      Create
+    </a>
+  </h1>
+
+  <form action="" method="get" class="form-inline table">
+    {{ search_form|crispy }}
+    <input class="btn btn-secondary" type="submit" value="🔍">
+  </form>
+
+  {% if publication_list %}
+    <ul>
+      {% for publication in publication_list %}
+        <li>
+          <a href="{% url "stories:publication-detail" pk=publication.id %} ">{{ publication.id }}</a>
+          {{ publication.title }} ({{ publication.city.name }})
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no publications</p>
+  {% endif %}
+{% endblock %}

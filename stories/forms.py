@@ -28,7 +28,7 @@ class PublicationForm(forms.ModelForm):
 
 
 class PublicationSearchForm(forms.Form):
-    model = forms.CharField(
+    title = forms.CharField(
         max_length=255,
         required=False,
         label="",
