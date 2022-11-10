@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Stories Home</h1>
+    <p>Welcome. Share your story with the world!</p>
+    <h2>Dynamic content</h2>
+    <ul>
+        <li><strong>Publications:</strong> {{ num_publications }}</li>
+        <li><strong>Authors:</strong> {{ num_authors }}</li>
+        <li><strong>Cities:</strong> {{ num_cities }}</li>
+    </ul>
+
+    <p>You have visited this page
+        {{ num_visits }} time{{ num_visits|pluralize }}.
+    </p>
+
+{% endblock %}
