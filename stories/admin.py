@@ -23,3 +23,12 @@ class AuthorAdmin(UserAdmin):
             ),
         )
     )
+
+
+@admin.register(Publication)
+class PublicationAdmin(admin.ModelAdmin):
+    search_fields = ("title",)
+    list_filter = ("city",)
+
+
+admin.site.register(City)
