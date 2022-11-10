@@ -19,3 +19,15 @@ class Author(AbstractUser):
         verbose_name = "author"
         verbose_name_plural = "authors"
 
+    def __str__(self):
+        return f"{self.username} ({self.first_name} {self.last_name})"
+
+
+class Publication(models.Model):
+    title = models.CharField(max_length=255)
+    story = models.TextField()
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    authors = models.ManyToManyField(Author, related_name="cars")
+
+    def __str__(self):
+        return self.title
