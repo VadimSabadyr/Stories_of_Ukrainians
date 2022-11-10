@@ -12,6 +12,11 @@ from .views import (
     PublicationUpdateView,
     PublicationDeleteView,
     toggle_assign_to_publication,
+    AuthorListView,
+    AuthorDetailView,
+    AuthorCreateView,
+    AuthorPseudonymUpdateView,
+    AuthorDeleteView,
 
 )
 
@@ -51,4 +56,22 @@ urlpatterns = [
         toggle_assign_to_publication,
         name="toggle-publication-assign",
     ),
+    path("authors/", AuthorListView.as_view(), name="author-list"),
+    path(
+        "authors/<int:pk>/", AuthorDetailView.as_view(), name="author-detail"
+    ),
+    path("authors/create/", AuthorCreateView.as_view(), name="author-create"),
+    path(
+        "authors/<int:pk>/update/",
+        AuthorPseudonymUpdateView.as_view(),
+        name="author-update",
+    ),
+    path(
+        "authors/<int:pk>/delete/",
+        AuthorDeleteView.as_view(),
+        name="author-delete",
+    ),
     ]
+
+app_name = "stories"
+
