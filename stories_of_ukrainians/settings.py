@@ -71,6 +71,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "stories_of_ukrainians.wsgi.application"
 
+AUTH_USER_MODEL = "stories.Author"
+
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
