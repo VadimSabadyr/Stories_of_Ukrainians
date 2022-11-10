@@ -11,7 +11,7 @@ class CitySearchForm(forms.Form):
         required=False,
         label="",
         widget=forms.TextInput(attrs={
-            "placeholder": "Search by manufacturer..."
+            "placeholder": "Search by city..."
         })
     )
 
@@ -49,7 +49,11 @@ class AuthorCreationForm(UserCreationForm):
 class AuthorPseudonymUpdateForm(forms.ModelForm):
     class Meta:
         model = Author
-        fields = ["pseudonym"]
+        fields = UserCreationForm.Meta.fields + (
+            "pseudonym",
+            "first_name",
+            "last_name",
+        )
 
 
 class AuthorSearchForm(forms.Form):

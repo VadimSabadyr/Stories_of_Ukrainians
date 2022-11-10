@@ -5,7 +5,8 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from .forms import CitySearchForm, PublicationSearchForm, PublicationForm, AuthorSearchForm, AuthorPseudonymUpdateForm
+from .forms import CitySearchForm, PublicationSearchForm, PublicationForm, AuthorSearchForm, AuthorPseudonymUpdateForm, \
+    AuthorCreationForm
 from .models import City, Author, Publication
 
 
@@ -60,7 +61,7 @@ class CityListView(LoginRequiredMixin, generic.ListView):
 class CityCreateView(LoginRequiredMixin, generic.CreateView):
     model = City
     fields = "__all__"
-    success_url = reverse_lazy("stories: city-list")
+    success_url = reverse_lazy("stories:city-list")
 
 
 class CityUpdateView(LoginRequiredMixin, generic.UpdateView):
@@ -151,12 +152,12 @@ class AuthorListView(LoginRequiredMixin, generic.ListView):
 
 class AuthorDetailView(LoginRequiredMixin, generic.DetailView):
     model = Author
-    queryset = Author.objects.all().prefetch_related("publications__city")
+    queryset = Author.objects.all().prefetch_related("authors__city")
 
 
 class AuthorCreateView(LoginRequiredMixin, generic.CreateView):
     model = Author
-    form_class = Author
+    form_class = AuthorCreationForm
 
 
 class AuthorPseudonymUpdateView(LoginRequiredMixin, generic.UpdateView):
