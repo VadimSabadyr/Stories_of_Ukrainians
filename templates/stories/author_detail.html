@@ -21,14 +21,15 @@
     <h4>Publication</h4>
 
     {% for publication in author.publications.all %}
-        <hr>
-        <p><strong>Title:</strong> {{ publication.title }}</p>
-        <p><strong>Story:</strong> {{ publication.story }}</p>
-        <p><strong>City:</strong> {{ publication.city.name }}</p>
-        <p class="text-muted"><strong>Id:</strong> {{publication.id}}</p>
+      <li>
+        {{ publication.title }}
+        <br>
+      </li>
+      <br>
+
 
     {% empty %}
-      <p>No Authors!</p>
+      <p>No publications!</p>
     {% endfor %}
   </div>
 {% endblock %}

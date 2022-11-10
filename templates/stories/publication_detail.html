@@ -7,14 +7,13 @@
   <p>City: ({{ publication.city.name }})</p>
   <h3>
     Authors
-
-    {% if publication in user.publications.all %}
+      {% if publication in user.publications.all %}
       <a href="{% url 'stories:toggle-publication-assign' pk=publication.id %}" class="btn btn-danger link-to-page">
-        Delete me from this story
+        Delete me from this car
       </a>
     {% else %}
       <a href="{% url 'stories:toggle-publication-assign' pk=publication.id %}" class="btn btn-success link-to-page">
-        Assign me from this story
+        Assign me from this publication
       </a>
     {% endif %}
 
@@ -25,10 +24,10 @@
       <li>
         {{ author.username }} ({{ author.first_name }} {{ author.last_name }})
         <br>
-        {{ publication.story }}
       </li>
       <br>
     {% endfor %}
+      <p>{{ publication.story }}</p>
       <a href="{% url 'stories:publication-delete' pk=publication.id %}" class="btn btn-danger link-to-page">
       Delete
     </a>

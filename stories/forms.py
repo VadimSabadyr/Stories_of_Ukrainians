@@ -17,7 +17,7 @@ class CitySearchForm(forms.Form):
 
 
 class PublicationForm(forms.ModelForm):
-    drivers = forms.ModelMultipleChoiceField(
+    authors = forms.ModelMultipleChoiceField(
         queryset=get_user_model().objects.all(),
         widget=forms.CheckboxSelectMultiple,
     )

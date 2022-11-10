@@ -32,7 +32,7 @@ class Publication(models.Model):
     title = models.CharField(max_length=255)
     story = models.TextField()
     city = models.ForeignKey(City, on_delete=models.CASCADE)
-    authors = models.ManyToManyField(Author, related_name="authors")
+    authors = models.ManyToManyField(Author, related_name="publications")
 
     def __str__(self):
         return self.title

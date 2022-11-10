@@ -5,8 +5,9 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from .forms import CitySearchForm, PublicationSearchForm, PublicationForm, AuthorSearchForm, AuthorPseudonymUpdateForm, \
-    AuthorCreationForm
+from .forms import (CitySearchForm, PublicationSearchForm,
+                    PublicationForm, AuthorSearchForm,
+                    AuthorPseudonymUpdateForm, AuthorCreationForm)
 from .models import City, Author, Publication
 
 
@@ -152,7 +153,7 @@ class AuthorListView(LoginRequiredMixin, generic.ListView):
 
 class AuthorDetailView(LoginRequiredMixin, generic.DetailView):
     model = Author
-    queryset = Author.objects.all().prefetch_related("authors__city")
+    queryset = Author.objects.all().prefetch_related("publications__city")
 
 
 class AuthorCreateView(LoginRequiredMixin, generic.CreateView):
@@ -168,16 +169,16 @@ class AuthorPseudonymUpdateView(LoginRequiredMixin, generic.UpdateView):
 
 class AuthorDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Author
-    success_url = reverse_lazy("")
+    success_url = reverse_lazy("stories:author-list")
 
 
 @login_required
 def toggle_assign_to_publication(request, pk):
     author = Author.objects.get(id=request.user.id)
     if (
-        Publication.objects.get(id=pk) in author.cars.all()
+        Publication.objects.get(id=pk) in author.publications.all()
     ):
-        author.cars.remove(pk)
+        author.publications.remove(pk)
     else:
-        author.cars.add(pk)
-    return HttpResponseRedirect(reverse_lazy("stories:author-detail", args=[pk]))
+        author.publications.add(pk)
+    return HttpResponseRedirect(reverse_lazy("stories:publication-detail", args=[pk]))
