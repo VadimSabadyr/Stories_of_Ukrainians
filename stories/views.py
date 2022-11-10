@@ -162,7 +162,7 @@ class AuthorCreateView(LoginRequiredMixin, generic.CreateView):
 class AuthorPseudonymUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Author
     form_class = AuthorPseudonymUpdateForm
-    success_url = reverse_lazy("taxi:author-list")
+    success_url = reverse_lazy("stories:author-list")
 
 
 class AuthorDeleteView(LoginRequiredMixin, generic.DeleteView):
@@ -171,7 +171,7 @@ class AuthorDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 
 @login_required
-def toggle_assign_to_car(request, pk):
+def toggle_assign_to_publication(request, pk):
     author = Author.objects.get(id=request.user.id)
     if (
         Publication.objects.get(id=pk) in author.cars.all()
@@ -179,4 +179,4 @@ def toggle_assign_to_car(request, pk):
         author.cars.remove(pk)
     else:
         author.cars.add(pk)
-    return HttpResponseRedirect(reverse_lazy("taxi:author-detail", args=[pk]))
+    return HttpResponseRedirect(reverse_lazy("stories:author-detail", args=[pk]))
