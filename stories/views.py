@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from .forms import CitySearchForm
+from .forms import CitySearchForm, PublicationSearchForm, PublicationForm
 from .models import City, Author, Publication
 
 
@@ -70,4 +70,52 @@ class CityUpdateView(LoginRequiredMixin, generic.UpdateView):
 
 class CityDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = City
-    success_url = reverse_lazy("taxi:city-list")
+    success_url = reverse_lazy("stories:city-list")
+
+
+class PublicationListView(LoginRequiredMixin, generic.ListView):
+    model = Publication
+    context_object_name = "publication_list"
+    template_name = "stories/publication_list.html"
+    paginate_by = 5
+    queryset = Publication.objects.all().select_related("city")
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(PublicationListView, self).get_context_data(**kwargs)
+
+        title = self.request.GET.get("title", "")
+
+        context["search_form"] = PublicationSearchForm(initial={"title": title})
+
+        return context
+
+    def get_queryset(self):
+        form = PublicationSearchForm(self.request.GET)
+
+        if form.is_valid():
+            return self.queryset.filter(
+                model__icontains=form.cleaned_data["model"]
+            )
+
+        return self.queryset
+
+
+class PublicationDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Publication
+
+
+class PublicationCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Publication
+    form_class = PublicationForm
+    success_url = reverse_lazy("stories:publication-list")
+
+
+class PublicationUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Publication
+    form_class = PublicationForm
+    success_url = reverse_lazy("stories:publication-list")
+
+
+class PublicationDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Publication
+    success_url = reverse_lazy("stories:publication-list")
