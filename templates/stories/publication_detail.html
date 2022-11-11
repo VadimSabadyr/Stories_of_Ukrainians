@@ -9,11 +9,11 @@
     Authors
       {% if publication in user.publications.all %}
       <a href="{% url 'stories:toggle-publication-assign' pk=publication.id %}" class="btn btn-danger link-to-page">
-        Delete me from this car
+        Delete me from this publication
       </a>
     {% else %}
       <a href="{% url 'stories:toggle-publication-assign' pk=publication.id %}" class="btn btn-success link-to-page">
-        Assign me from this publication
+        Assign me to this publication
       </a>
     {% endif %}
 

@@ -18,12 +18,11 @@
     <ul>
       {% for publication in publication_list %}
         <li>
-          <a href="{% url "stories:publication-detail" pk=publication.id %} ">{{ publication.id }}</a>
-
-          {{ publication.title }}
-          ({{ publication.city.name }})
-          <br>
-          {{ publication.story }}
+          <p>From {{ publication.city.name }}</p>
+          <a href="{% url "stories:publication-detail" pk=publication.id %} ">{{ publication.title }}</a>
+          <div class="text">
+            {{ publication.story|truncatechars:250  }}
+          </div>
         </li>
         <br>
       {% endfor %}
