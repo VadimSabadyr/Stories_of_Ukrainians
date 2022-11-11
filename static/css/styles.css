@@ -4,7 +4,7 @@ html, body {
 }
 
 body {
-    background: linear-gradient(-45deg, rgba(175, 180, 68, 0.54), rgba(39, 200, 215, 0.58), rgba(239, 253, 12, 0.66), #23d5ab);
+    background: linear-gradient(-45deg, rgba(225, 169, 149, 0.53), #e5ea82, #66bbde, rgba(148, 222, 206, 0.26));
     background-size: 400% 400%;
     animation: gradient 15s ease infinite;
 }
@@ -20,7 +20,7 @@ body {
         background-position: 0% 50%;
     }
 }
-.link-to-page {
-    float: right;
-    margin: 0 2px 0 2px;
+
+#appSummary{
+    justify-content:center;
 }

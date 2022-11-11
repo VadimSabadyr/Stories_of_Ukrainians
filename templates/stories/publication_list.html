@@ -2,29 +2,29 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
-  <h1>
-    Publication list
-    <a href="{% url 'stories:publication-create' %}" class="btn btn-primary link-to-page">
-      Create
-    </a>
+  <h1 style="margin-top: 5px">
+    All Publication
   </h1>
-
   <form action="" method="get" class="form-inline table">
     {{ search_form|crispy }}
-    <input class="btn btn-secondary" type="submit" value="🔍">
+    <input style="margin-left: 5px" class="btn btn-secondary" type="submit" value="Search">
+      <a style="margin-left: 729px" href="{% url 'stories:publication-create' %}" class="btn btn-primary link-to-page">
+      Create
+    </a>
   </form>
 
   {% if publication_list %}
     <ul>
       {% for publication in publication_list %}
-        <li>
-          <p>From {{ publication.city.name }}</p>
-          <a href="{% url "stories:publication-detail" pk=publication.id %} ">{{ publication.title }}</a>
-          <div class="text">
-            {{ publication.story|truncatechars:250  }}
-          </div>
-        </li>
-        <br>
+          <div class="card">
+    <h5 class="card-header">From {{ publication.city.name }}</h5>
+    <div class="card-body">
+      <h5 class="card-title">{{ publication.title }}</h5>
+      <p class="card-text">{{ publication.story|truncatechars:250  }}</p>
+      <a href="{% url "stories:publication-detail" pk=publication.id %}" class="btn btn-primary">View Detail</a>
+    </div>
+  </div>
+  <br>
       {% endfor %}
     </ul>
   {% else %}

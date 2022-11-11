@@ -2,35 +2,40 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
-  <h1>
-    Author List
-    <a href="{% url 'stories:author-create' %}" class="btn btn-primary link-to-page">
-      Create
-    </a>
+  <h1 style="margin-top: 5px">
+    All Authors
   </h1>
   <form action="" method="get" class="form-inline table">
     {{ search_form|crispy }}
-    <input class="btn btn-secondary" type="submit" value="🔍">
+    <input style="margin-left: 5px" class="btn btn-secondary" type="submit" value="Search">
+      <a style="margin-left: 729px" href="{% url 'stories:author-create' %}" class="btn btn-primary link-to-page">
+      Create
+    </a>
   </form>
 
   {% if author_list %}
     <table class="table">
+      <thead class="thead-dark">
       <tr>
-        <th>ID</th>
-        <th>Username</th>
-        <th>First name</th>
-        <th>Last name</th>
-        <th>Pseudonym</th>
+        <th scope="col">ID</th>
+        <th scope="col">Username</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Pseudonym</th>
       </tr>
+      </thead>
+
+      <tbody>
       {% for author in author_list %}
         <tr>
-          <td>{{ author.id }}</td>
-          <td><a href="{{ author.get_absolute_url }}">{{ author.username }} {% if user == author %} (Me){% endif %}</a>
-          </td>
-          <td>{{ author.first_name }}</td>
-          <td>{{ author.last_name }}</td>
-          <td>{{ author.pseudonym }}</td>
+          <th class="table-info" scope="row">{{ author.id }}</th>
+          <td class="table-info"><a href="{{ author.get_absolute_url }}">{{ author.username }} {% if user == author %} (Me){% endif %}</td>
+          <td class="table-info">{{ author.first_name }}</td>
+          <td class="table-info">{{ author.last_name }}</td>
+          <td class="table-info">{{ author.pseudonym }}</td>
         </tr>
+
+        </tbody>
       {% endfor %}
 
     </table>

@@ -1,39 +1,35 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h2>
+  <h1 style="margin-top: 5px">
     {{ publication.title }}
-  </h2>
+  </h1>
   <p>City: ({{ publication.city.name }})</p>
   <h3>
     Authors
-      {% if publication in user.publications.all %}
-      <a href="{% url 'stories:toggle-publication-assign' pk=publication.id %}" class="btn btn-danger link-to-page">
+    {% if publication in user.publications.all %}
+      <a style="margin-left: 729px" href="{% url 'stories:toggle-publication-assign' pk=publication.id %}" class="btn btn-danger link-to-page">
         Delete me from this publication
       </a>
     {% else %}
-      <a href="{% url 'stories:toggle-publication-assign' pk=publication.id %}" class="btn btn-success link-to-page">
+      <a style="margin-left: 729px" href="{% url 'stories:toggle-publication-assign' pk=publication.id %}" class="btn btn-success link-to-page">
         Assign me to this publication
       </a>
     {% endif %}
 
   </h3>
   <hr>
+  <p>{{ publication.story }}</p>
+  <a href="{% url 'stories:publication-delete' pk=publication.id %}" class="btn btn-danger link-to-page">
+    Delete
+  </a>
+
+  <a href="{% url 'stories:publication-update' pk=publication.id %}" class="btn btn-success link-to-page">
+    Update
+  </a>
   <ul>
     {% for author in publication.authors.all %}
-      <li>
-        {{ author.username }} ({{ author.first_name }} {{ author.last_name }})
-        <br>
-      </li>
-      <br>
+      <p style="margin-top: 15px">{{ author.username }} ({{ author.first_name }} {{ author.last_name }})</p>
     {% endfor %}
-      <p>{{ publication.story }}</p>
-      <a href="{% url 'stories:publication-delete' pk=publication.id %}" class="btn btn-danger link-to-page">
-      Delete
-    </a>
-
-    <a href="{% url 'stories:publication-update' pk=publication.id %}" class="btn btn-secondary link-to-page">
-      Update
-    </a>
   </ul>
 {% endblock %}

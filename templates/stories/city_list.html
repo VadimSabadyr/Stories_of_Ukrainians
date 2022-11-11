@@ -2,45 +2,44 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
-  <h1>
-    City List
-    <a href="{% url 'stories:city-create' %}" class="btn btn-primary link-to-page">
-      Create
-    </a>
+  <h1 style="margin-top: 5px">
+    All Cities
   </h1>
   <form action="" method="get" class="form-inline table">
     {{ search_form|crispy }}
-    <input class="btn btn-secondary" type="submit" value="🔍">
+    <input style="margin-left: 5px" class="btn btn-secondary" type="submit" value="Search">
+    <a style="margin-left: 729px" href="{% url 'stories:city-create' %}" class="btn btn-primary link-to-page">
+      Create
+    </a>
   </form>
   {% if city_list %}
     <table class="table">
+      <thead class="thead-dark">
       <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Update</th>
-        <th>Delete</th>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
       </tr>
+      </thead>
 
+      <tbody>
       {% for city in  city_list %}
         <tr>
-          <td>
-            {{ city.id }}
-          </td>
-          <td>
-            {{ city.name }}
-          </td>
-          <td>
-            <a href="{% url 'stories:city-update' pk=city.id %}">
+          <th class="table-info" scope="row">{{ city.id }}</th>
+          <td class="table-info">{{ city.name }}</td>
+          <td class="table-info">
+            <a class="btn btn-success link-to-page" href="{% url 'stories:city-update' pk=city.id %}">
               Update
             </a>
-          </td>
-          <td>
-            <a style="color: red"
-               href="{% url 'stories:city-delete' pk=city.id %}">
+            </td>
+          <td class="table-info">
+            <a class="btn btn-danger link-to-page" href="{% url 'stories:city-delete' pk=city.id %}">
               Delete
             </a>
           </td>
         </tr>
+        </tbody>
       {% endfor %}
     </table>
 

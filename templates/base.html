@@ -15,13 +15,14 @@
 </head>
 
 <body>
-
   {% block sidebar %}
     {% include "includes/sidebar.html" %}
   {% endblock %}
-
-{#  <div class="row">#}
-    <div class="col-sm-8 ">
+  <div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-2">
+    </div>
+    <div class="col-sm-8">
 
       {% block content %}{% endblock %}
 
@@ -30,7 +31,8 @@
       {% endblock %}
 
     </div>
-{#  </div>#}
+  </div>
+</div>
 </body>
 
 </html>

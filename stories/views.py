@@ -80,7 +80,7 @@ class PublicationListView(LoginRequiredMixin, generic.ListView):
     model = Publication
     context_object_name = "publication_list"
     template_name = "stories/publication_list.html"
-    paginate_by = 5
+    paginate_by = 2
     queryset = Publication.objects.all().select_related("city")
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -126,7 +126,7 @@ class PublicationDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 class AuthorListView(LoginRequiredMixin, generic.ListView):
     model = Author
-    paginate_by = 5
+    paginate_by = 10
     queryset = Author.objects.all()
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -159,6 +159,7 @@ class AuthorDetailView(LoginRequiredMixin, generic.DetailView):
 class AuthorCreateView(LoginRequiredMixin, generic.CreateView):
     model = Author
     form_class = AuthorCreationForm
+    success_url = reverse_lazy("stories:author-list")
 
 
 class AuthorPseudonymUpdateView(LoginRequiredMixin, generic.UpdateView):

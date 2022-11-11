@@ -1,16 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>
+  <h1 style="margin-top: 5px">
     Username: {{ author.username }}
-    <a href="{% url 'stories:author-delete' pk=author.id %}" class="btn btn-danger link-to-page">
+    <a style="margin-left: 600px" href="{% url 'stories:author-delete' pk=author.id %}"
+       class="btn btn-danger link-to-page">
       Delete
     </a>
-
-    <a href="{% url 'stories:author-update' pk=author.id %}" class="btn btn-secondary link-to-page">
+    <a style="margin-left: -220px"href="{% url 'stories:author-update' pk=author.id %}" class="btn btn-success link-to-page">
       Update author
     </a>
   </h1>
+
 
   <p><strong>First name:</strong> {{ author.first_name }}</p>
   <p><strong>Last name:</strong> {{ author.last_name }}</p>
