@@ -4,7 +4,7 @@ A simple site where you can read the stories of Ukrainians.
 
 You can check it via link below
 
-* username: Admin
+* username: admin
 * password: 796796admin541
 
 ## Installation 
