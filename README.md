@@ -11,11 +11,11 @@ password: 796796admin541
 
 Python3 must be installed
 
-git clone https://github.com/VadimSabadyr/Stories_of_Ukrainians
-git checkout develop
-venv\Scripts\activate (on Windows)
-source venv/bin/activate (on macOS)
-pip install -r requirements.txt
+*git clone https://github.com/VadimSabadyr/Stories_of_Ukrainians
+*git checkout develop
+*venv\Scripts\activate (on Windows)
+*source venv/bin/activate (on macOS)
+*pip install -r requirements.txt
 ---
 python manage.py runserver
 
