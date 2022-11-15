@@ -6,6 +6,7 @@ You can check it via link below
 
 * username: admin
 * password: 796796admin541
+* https://stories-in-ukrainiane.onrender.com/
 
 ## Installation 
 
