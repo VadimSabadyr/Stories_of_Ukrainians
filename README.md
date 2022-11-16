@@ -4,7 +4,7 @@ A simple site where you can read the stories of Ukrainians.
 
 You can check it via link below
 
-* username: admin
+* username: Jo
 * password: 796796admin541
 * https://stories-in-ukrainiane.onrender.com/
 
