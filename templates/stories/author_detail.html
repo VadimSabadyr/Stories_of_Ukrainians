@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1 style="margin-top: 5px">
+    Username: {{ author.username }}
+    <a style="margin-left: 600px" href="{% url 'stories:author-delete' pk=author.id %}"
+       class="btn btn-danger link-to-page">
+      Delete
+    </a>
+    <a style="margin-left: -220px"href="{% url 'stories:author-update' pk=author.id %}" class="btn btn-success link-to-page">
+      Update author
+    </a>
+  </h1>
+
+
+  <p><strong>First name:</strong> {{ author.first_name }}</p>
+  <p><strong>Last name:</strong> {{ author.last_name }}</p>
+  <p><strong>Pseudonym:</strong> {{ author.pseudonym }}</p>
+  <p><strong>Is staff:</strong> {{ author.is_staff }}</p>
+
+  <hr>
+  <div class="ml-3">
+    <h3>
+      {% if author.publications.all|length > 1 %}
+        Publications
+      {% else %}
+        Publication
+      {% endif %}
+
+    </h3>
+
+    {% for publication in author.publications.all %}
+      <p class="text-muted"><strong>Id:</strong> {{ publication.id }}</p>
+      <p><strong>Title:</strong> {{ publication.title }}</p>
+      <p><strong>City Publication:</strong> {{ publication.city.name }}</p>
+      <p><strong>Story:</strong> {{ publication.story }}</p>
+
+
+
+    {% empty %}
+      <p>No publications!</p>
+    {% endfor %}
+  </div>
+{% endblock %}

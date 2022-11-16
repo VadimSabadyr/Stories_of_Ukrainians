@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Stories Home</h1>
+  <p>Welcome. Share your story with the world!</p>
+
+  <div class="card">
+    <h5 class="card-header">All Authors: {{ num_authors }}</h5>
+    <div class="card-body">
+      <p class="card-text">You can view all the authors who have already managed to write their stories. <br>👇</p>
+      <a href="{% url "stories:author-list" %}" class="btn btn-primary">All Authors</a>
+    </div>
+  </div>
+  <br>
+
+  <div class="card">
+    <h5 class="card-header">All Publications: {{ num_publications }}</h5>
+    <div class="card-body">
+      <p class="card-text">You can view stories that have already been shared. Click on the button. <br>👇</p>
+      <a href="{% url "stories:publication-list" %}" class="btn btn-primary">All Publications</a>
+    </div>
+  </div>
+  <br>
+
+  <div class="card">
+    <h5 class="card-header">All Cities: {{ num_cities }}</h5>
+    <div class="card-body">
+      <p class="card-text">You can view the following list of cities.<br>👇</p>
+      <a href="{% url "stories:city-list" %}" class="btn btn-primary">All Cities</a>
+    </div>
+  </div>
+  <br>
+
+
+  <p>You have visited this page
+    {{ num_visits }} time{{ num_visits|pluralize }}.
+  </p>
+
+{% endblock %}
