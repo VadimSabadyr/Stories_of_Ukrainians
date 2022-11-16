@@ -18,8 +18,16 @@
   <p><strong>Pseudonym:</strong> {{ author.pseudonym }}</p>
   <p><strong>Is staff:</strong> {{ author.is_staff }}</p>
 
+  <hr>
   <div class="ml-3">
-    <h4>Publication</h4>
+    <h3>
+      {% if author.publications.all|length > 1 %}
+        Publications
+      {% else %}
+        Publication
+      {% endif %}
+
+    </h3>
 
     {% for publication in author.publications.all %}
       <p class="text-muted"><strong>Id:</strong> {{ publication.id }}</p>

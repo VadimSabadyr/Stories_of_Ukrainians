@@ -4,20 +4,20 @@
   <h1 style="margin-top: 5px">
     {{ publication.title }}
   </h1>
-  <p>City: ({{ publication.city.name }})</p>
-  <h3>
-    Authors
+  <p>
+    City: ({{ publication.city.name }})
     {% if publication in user.publications.all %}
-      <a style="margin-left: 729px" href="{% url 'stories:toggle-publication-assign' pk=publication.id %}" class="btn btn-danger link-to-page">
+      <a style="margin-left: 729px" href="{% url 'stories:toggle-publication-assign' pk=publication.id %}"
+         class="btn btn-danger link-to-page">
         Delete me from this publication
       </a>
     {% else %}
-      <a style="margin-left: 729px" href="{% url 'stories:toggle-publication-assign' pk=publication.id %}" class="btn btn-success link-to-page">
+      <a style="margin-left: 729px" href="{% url 'stories:toggle-publication-assign' pk=publication.id %}"
+         class="btn btn-success link-to-page">
         Assign me to this publication
       </a>
     {% endif %}
-
-  </h3>
+  </p>
   <hr>
   <p>{{ publication.story }}</p>
   <a href="{% url 'stories:publication-delete' pk=publication.id %}" class="btn btn-danger link-to-page">
@@ -27,7 +27,15 @@
   <a href="{% url 'stories:publication-update' pk=publication.id %}" class="btn btn-success link-to-page">
     Update
   </a>
+  <hr>
   <ul>
+    <h3>
+      {% if publication.authors.all|length > 1 %}
+        Authors
+      {% else %}
+        Author
+      {% endif %}
+    </h3>
     {% for author in publication.authors.all %}
       <p style="margin-top: 15px">{{ author.username }} ({{ author.first_name }} {{ author.last_name }})</p>
     {% endfor %}
