@@ -4,14 +4,15 @@
 {% block content %}
   <h1 style="margin-top: 5px">
     All Authors
+    <a style="float: right" href="{% url 'stories:author-create' %}" class="btn btn-primary link-to-page">
+      Create
+    </a>
   </h1>
   <form action="" method="get" class="form-inline table">
     {{ search_form|crispy }}
     <input style="margin-left: 5px" class="btn btn-secondary" type="submit" value="Search">
-      <a style="margin-left: 729px" href="{% url 'stories:author-create' %}" class="btn btn-primary link-to-page">
-      Create
-    </a>
   </form>
+
 
   {% if author_list %}
     <table class="table">
@@ -29,7 +30,8 @@
       {% for author in author_list %}
         <tr>
           <th class="table-info" scope="row">{{ author.id }}</th>
-          <td class="table-info"><a href="{{ author.get_absolute_url }}">{{ author.username }} {% if user == author %} (Me){% endif %}</td>
+          <td class="table-info"><a href="{{ author.get_absolute_url }}">{{ author.username }} {% if user == author %}
+            (Me){% endif %}</td>
           <td class="table-info">{{ author.first_name }}</td>
           <td class="table-info">{{ author.last_name }}</td>
           <td class="table-info">{{ author.pseudonym }}</td>

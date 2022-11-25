@@ -4,13 +4,13 @@
 {% block content %}
   <h1 style="margin-top: 5px">
     All Cities
+    <a style="float: right" href="{% url 'stories:city-create' %}" class="btn btn-primary link-to-page">
+      Create
+    </a>
   </h1>
   <form action="" method="get" class="form-inline table">
     {{ search_form|crispy }}
     <input style="margin-left: 5px" class="btn btn-secondary" type="submit" value="Search">
-    <a style="margin-left: 729px" href="{% url 'stories:city-create' %}" class="btn btn-primary link-to-page">
-      Create
-    </a>
   </form>
   {% if city_list %}
     <table class="table">
@@ -32,7 +32,7 @@
             <a class="btn btn-success link-to-page" href="{% url 'stories:city-update' pk=city.id %}">
               Update
             </a>
-            </td>
+          </td>
           <td class="table-info">
             <a class="btn btn-danger link-to-page" href="{% url 'stories:city-delete' pk=city.id %}">
               Delete
